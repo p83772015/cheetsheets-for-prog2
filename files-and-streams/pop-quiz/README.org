@@ -1,37 +1,41 @@
-* Pop Quiz 1
-** What happens if you call ~in_file.open("")~?
-** Answer
-If you pass an empty string as the first argument of ~open()~, the file opening will fail and will return ~true~ if you call its ~fail()~ method.
-* Pop Quiz 2
-** What is wrong with the following code?
+* Pop Quiz 1-5
+** Pop Quiz 1
+Q: What happens if you call ~in_file.open("")~?
+
+A: If you pass an empty string as the first argument of ~open()~, the file opening will fail and will return ~true~ if you call its ~fail()~ method.
+** Pop Quiz 2
+Q: What is wrong with the following code?
 #+begin_src c++
   ifstream out_file;
   out_file.open("output.txt");
   out_file << "Hello, World!" << end;
 #+end_src
-** Answer
-The code attempts to write the string ~"Hello, World"~ to an ~ifstream~ object.  Objects created using ~ifstream~ are read-only; it does not allow writing.
-* Pop Quiz 3
-** Suppose the input stream contains the characters ~6,995.0~.  What is the value of ~number~ and ~ch~ after these statements?
+A: The code attempts to write the string ~"Hello, World"~ to an ~ifstream~ object.  Objects created using ~ifstream~ are read-only; it does not allow writing.
+** Pop Quiz 3
+Q: Suppose the input stream contains the characters ~6,995.0~.  What is the value of ~number~ and ~ch~ after these statements?
 #+begin_src c++
   int number;
   char ch;
   in_file >> number;
   in_file.get(ch);
 #+end_src
-** Answer
-After runnining the statements, the values of ~number~ and ~ch~ are the integer ~6~ (six) and the character ~,~ (colon).
-* Pop Quiz 4
-** Suppose you are writing a program that uses a stream called ~fin~, which will be connected to an input file, and a stream called ~fout~, which will be connected to an input file.
+
+A: After runnining the statements, the values of ~number~ and ~ch~ are the integer ~6~ (six) and the character ~,~ (colon).
+** Pop Quiz 4
+Q: Suppose you are writing a program that uses a stream called ~fin~, which will be connected to an input file, and a stream called ~fout~, which will be connected to an input file.
+
 - How do you declare ~fin~ and ~fout~?
 - What include directive, if any, do you need to place in your program file?
-** Answer
+
+A:
+
 - ~ifstream fin;~.
 - ~ofstream fout;~.
 - ~#include <fstream>~
-* Pop Quiz 5
-** A programmer has read half of the lines in a file.  What must the programmer do to the file to enable reading the first line a second time?
-After reading the first line, the programmer must invoke ~in_file.seekg(0)~ to position the cursor back into the beginning of file.
+** Pop Quiz 5
+Q: A programmer has read half of the lines in a file.  What must the programmer do to the file to enable reading the first line a second time?
+
+A: After reading the first line, the programmer must invoke ~in_file.seekg(0)~ to position the cursor back into the beginning of file.
 
 For exmple:
 #+begin_src c++
