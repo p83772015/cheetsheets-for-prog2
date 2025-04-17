@@ -1,0 +1,80 @@
+* Pop Quiz 1
+** What happens if you call ~in_file.open("")~?
+** Answer
+If you pass an empty string as the first argument of ~open()~, the file opening will fail and will return ~true~ if you call its ~fail()~ method.
+* Pop Quiz 2
+** What is wrong with the following code?
+#+begin_src c++
+  ifstream out_file;
+  out_file.open("output.txt");
+  out_file << "Hello, World!" << end;
+#+end_src
+** Answer
+The code attempts to write the string ~"Hello, World"~ to an ~ifstream~ object.  Objects created using ~ifstream~ are read-only; it does not allow writing.
+* Pop Quiz 3
+** Suppose the input stream contains the characters ~6,995.0~.  What is the value of ~number~ and ~ch~ after these statements?
+#+begin_src c++
+  int number;
+  char ch;
+  in_file >> number;
+  in_file.get(ch);
+#+end_src
+** Answer
+After runnining the statements, the values of ~number~ and ~ch~ are the integer ~6~ (six) and the character ~,~ (colon).
+* Pop Quiz 4
+** Suppose you are writing a program that uses a stream called ~fin~, which will be connected to an input file, and a stream called ~fout~, which will be connected to an input file.
+- How do you declare ~fin~ and ~fout~?
+- What include directive, if any, do you need to place in your program file?
+** Answer
+- ~ifstream fin;~.
+- ~ofstream fout;~.
+- ~#include <fstream>~
+* Pop Quiz 5
+** A programmer has read half of the lines in a file.  What must the programmer do to the file to enable reading the first line a second time?
+After reading the first line, the programmer must invoke ~in_file.seekg(0)~ to position the cursor back into the beginning of file.
+
+For exmple:
+#+begin_src c++
+  #include <iostream>
+  #include <fstream>
+  using namespace std;
+
+  int
+  main ()
+  {
+    fstream in_file;
+    char ch;
+
+    // Open the text file.
+    in_file.open("pop-quiz-5.txt", ios::in);
+    if (in_file.fail()) {
+      cerr << "File failed to open.\n";
+      exit(1);
+    }
+
+    // The text file "pop-quiz-5.txt" contains the text:
+    // """
+    // A line of text.
+    // Another line of text.
+    // """
+
+    // Read until first newline.
+    while (! in_file.eof()) {
+      in_file.get(ch);	   // Get the character on cursor; advance it.
+      cout << ch;		   // Display the character.
+      if (ch == '\n') break; // Break out if ch is a newline.
+    }
+
+    // Position the cursor back into the beginning of file.
+    in_file.seekg(0);
+
+    // Read until first newline.
+    while (! in_file.eof()) {
+      in_file.get(ch);	   // Get the character on cursor; advance it.
+      cout << ch;		   // Display the character.
+      if (ch == '\n') break; // Break out if ch is a newline.
+    }
+
+  }
+
+#+end_src
