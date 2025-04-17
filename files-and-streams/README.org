@@ -43,7 +43,7 @@
 | ~ios::trunc~ | write to a file; remove old contents first            | ~ofstream~ or ~fstream~ |
 |            |                                                       |                    |
 ** Basic usage
-*** Write to a file
+*** Writing to a file
 Remember to include ~<fstream>~
 #+begin_src c++
   int main()
@@ -63,7 +63,7 @@ Output:
   ~ $ cat filedata.txt			       # Read ‘filedata.txt’
   Hello World!
 #+end_src
-*** Append to a file
+*** Appending to a file
 #+begin_src c++
   int main()
   {
@@ -83,7 +83,7 @@ Output:
   Hello World!
   Bye World!
 #+end_src
-*** Read from a file
+*** Reading from a file
 Remember to include ~<fstream>~
 #+begin_src c++
   int main()
@@ -107,7 +107,7 @@ Remember to include ~<fstream>~
     return 0;
   }
 #+end_src
-*** Check if a file stream is open
+*** Checking if a file stream is open
 Remember to include ~<fstream>~
 #+begin_src c++
   int main()
@@ -157,7 +157,7 @@ Remember to include ~<fstream>~
     return 0;
   }
 #+end_src
-*** Check for the end  of the file (eof)
+*** Checking for the end  of the file (eof)
 #+begin_src c++
 #include <iostream>
 #include <fstream>
@@ -211,7 +211,7 @@ main ()
   return 0;
 }
 #+end_src
-*** Close a file stream
+*** Closing a file stream
 Is is always a good practice that a programmer should close all the opened files before program termination.
 #+begin_src c++
   void close();
