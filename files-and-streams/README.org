@@ -4,19 +4,19 @@
 :END:
 
 :CONTENTS:
-+ [[#c-files-and-streams][C++ Files and Streams]]
-  + [[#classes][Classes]]
-  + [[#header-files][Header files]]
-  + [[#standard-syntax][Standard syntax]]
-    + [[#available-mode-flags][Available mode flags]]
-  + [[#basic-usage][Basic usage]]
-    + [[#write-to-a-file][Write to a file]]
-    + [[#append-to-a-file][Append to a file]]
-    + [[#read-from-a-file][Read from a file]]
-    + [[#check-if-a-file-stream-is-open][Check if a file stream is open]]
-    + [[#file-io-with-checks-on-open][File I/O with checks on open]]
-    + [[#check-for-the-end--of-the-file-eof][Check for the end  of the file (eof)]]
-    + [[#close-a-file-stream][Close a file stream]]
+- [[#c-files-and-streams][C++ Files and Streams]]
+  - [[#classes][Classes]]
+  - [[#header-files][Header files]]
+  - [[#standard-syntax][Standard syntax]]
+    - [[#available-mode-flags][Available mode flags]]
+  - [[#basic-usage][Basic usage]]
+    - [[#writing-to-a-file][Writing to a file]]
+    - [[#appending-to-a-file][Appending to a file]]
+    - [[#reading-from-a-file][Reading from a file]]
+    - [[#checking-if-a-file-stream-is-open][Checking if a file stream is open]]
+    - [[#file-io-with-checks-on-open][File I/O with checks on open]]
+    - [[#checking-for-the-end--of-the-file-eof][Checking for the end  of the file (eof)]]
+    - [[#closing-a-file-stream][Closing a file stream]]
 :END:
 
 ** Classes
