@@ -32,7 +32,7 @@ Remember to include ~<fstream>~
   outfile.close();		// Close the ‘ofstream’ object.
 #+end_src
 Output:
-#+begin_src console
+#+begin_src sh
   ~ $ g++ -g -O -o fstream-write fstream-write.cpp # Compile using g++
   ~ $ ./fstream-write			       # Run binary
   ~ $ cat filedata.txt			       # Read ‘filedata.txt’
@@ -46,7 +46,7 @@ Output:
   outfile.close();		// Close the ‘ofstream’ object.  
 #+end_src
 Output:
-#+begin_src console
+#+begin_src sh
   ~ $ g++ -g -O -o fstream-append fstream-append.cpp # Compile using g++
   ~ $ ./fstream-append				   # Run binary
   ~ $ cat filedata.txt				   # Read ‘filedata.txt’
