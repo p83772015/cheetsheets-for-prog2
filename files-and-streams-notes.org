@@ -1,0 +1,175 @@
+#+TITLE: C++ Files and Streams
+* Classes
+- ~ofstream~ :: Class to *Write* on files.
+- ~ifstream~ :: Class to *Read* from files.
+- ~fstream~ :: Class to *Both read and write* from/to files.
+* Header files
+- ~<iostream>~
+- ~<fstream>~
+* Standard syntax
+#+begin_src c++
+  steamobject.open(filename, mode_flag);
+  // Open the first argument FILENAME for writing/reading. The second
+  // argument MODE_FLAG determines the operation by which to perform on
+  // FILENAME.
+  #+end_src
+** Available mode flags
+| Mode Flag  | Description                                           | Used for?          |
+|------------+-------------------------------------------------------+--------------------|
+| ~ios::app~   | append only at the end of a file                      | ~ofstream~           |
+| ~ios::ate~   | append; allow insertion at any point of file          | ~ofstream~           |
+| ~ios::in~    | read from a file                                      | ~fstream~            |
+| ~ios::out~   | write to a file; previous text of file is overwritten | ~fstream~            |
+| ~ios::trunc~ | write to a file; remove old contents first            | ~ofstream~ or ~fstream~ |
+|            |                                                       |                    |
+* Basic usage
+** Write to a file
+Remember to include ~<fstream>~
+#+begin_src c++
+  ofstream outfile;		// Create an ‘outstream’ object.
+  outfile.open("filedata.txt");	// Open the file.
+  outfile << "Hello World!\n";	// Write string to file.
+  outfile.close();		// Close the ‘ofstream’ object.
+#+end_src
+Output:
+#+begin_src sh
+  ~ $ g++ -g -O -o fstream-write fstream-write.cpp # Compile using g++
+  ~ $ ./fstream-write			       # Run binary
+  ~ $ cat filedata.txt			       # Read ‘filedata.txt’
+  Hello World!
+#+end_src
+** Append to a file
+#+begin_src c++
+  ofstream outfile;		// Create an ‘outstream’ object.
+  outfile.open("filedata.txt", ios::app); // Pass ‘ios::app’ as second argument
+  outfile << "Bye World!\n";	    // Write string to file.
+  outfile.close();		// Close the ‘ofstream’ object.  
+#+end_src
+Output:
+#+begin_src sh
+  ~ $ g++ -g -O -o fstream-append fstream-append.cpp # Compile using g++
+  ~ $ ./fstream-append				   # Run binary
+  ~ $ cat filedata.txt				   # Read ‘filedata.txt’
+  Hello World!
+  Bye World!
+#+end_src
+** Read from a file
+Remember to include ~<fstream>~
+#+begin_src c++
+  char data[100];
+
+  ifstream infile;		// Create an ‘instream’ object.
+  infile.open("filedata.txt");	// Open the file.
+
+  // Read the file one time.
+  infile >> data;			// Read the file.
+  cout << data << endl;		// Dispal the final contents.
+
+  // Read the file one more time.
+  infile >> data; 		// Read the file.
+  cout << data << endl; 		// Display the file contents
+
+  // Close file object.
+  infile.close();
+#+end_src
+** Check if a file stream is open
+Remember to include ~<fstream>~
+#+begin_src c++
+  ofstream myfile("example.txt");
+  if (myfile.is_open()) {
+    myfile << "This is a line.\n";
+    myfile << "This is another line.\n";
+    myfile.close();
+  }
+  else cout << "Unable to open file";
+  return 0;
+#+end_src
+** File I/O with checks on open
+#+begin_src c++
+  ifstream inStream;
+  ofstream outStream;
+
+  // Exit the program if opening "infile.txt" for reading fails.
+  inStream.open("infile.txt");
+  if (inStream.fail()) {
+    cout << "Input file opening failed.\n";
+    exit(1);
+  }
+
+  // Exit the program if opening  "outfile.txt" for writing fails.
+  outStream.open("outfile.txt");
+  if (outStream.fail()) {
+    cout << "Output file opening failed.\n";
+    exit(1);
+  }
+
+  // Run only if opening both "infile.txt" and "outfile.txt" succeeds.
+  int first, second, third;
+  inStream >> first >> second >> third;
+  outStream << "The sum of the first 3\n"
+            << "numbers in infile.txt\n"
+            << "is " << (first + second + third) << endl;
+
+  inStream.close();
+  outStream.close();
+
+#+end_src
+** Check for the end  of the file (eof)
+#+begin_src c++
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+
+using namespace std;
+
+int
+main ()
+{
+  // Declare file stream objects.
+  ifstream fin;
+  ofstream fout;
+
+  // Open "Story.txt" for reading.
+  fin.open("Story.txt");
+  if (fin.fail()) {
+    cout << "Input file opening failed.\n";
+    exit(1);
+  }
+
+  // Open "Numstory.txt" for writing.
+  fin.open("Numstory.txt");
+  if (fout.fail()) {
+    cout << "Output file opening failed.\n";
+    exit(1);
+  }
+
+  // Declare these essential state variables.
+  char next;			// Used to store the next character.
+  int n = 1;			// current line number; will
+				// increment.
+
+  // Initial process.
+  fin.get(next);		// Get the first character from "Story.txt".
+  fout << n << " ";		// Write the current line number to "Numstory.txt" + blank space.
+
+  // Main process
+  while (! fin.eof()) {		// While not in ‘end of line’, do the ff.
+    fout << next;		//   1. Write the character stored in ‘next’.
+    if (next == '\n') {		//   2. If characer stored in ‘next’ is a newline? {
+      n++;			//        Increment ‘n’, the line number.
+      fout << n << ' ';		//        Write the incremented line number + blank space.
+    }				//      }
+    fin.get(next);		//   3. Get the next character from "Story.txt".
+  }
+
+  // Close the file streams.
+  fin.close();
+  fout.close();
+  return 0;
+}
+#+end_src
+** Close a file stream
+Is is always a good practice that a programmer should close all the opened files before program termination.
+#+begin_src c++
+  void close();
+#+end_src
