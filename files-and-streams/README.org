@@ -1,5 +1,3 @@
-#+TITLE: C++ Files and Streams
-
 * C++ Files and Streams
 :PROPERTIES:
 :TOC:      :include all
