@@ -36,6 +36,7 @@ Q: What is wrong with the following code?
 #+end_src
 A: The code attempts to write the string ~"Hello, World"~ to an ~ifstream~ object.  Objects created using ~ifstream~ are read-only; it does not allow writing.
 *** To Illustrate
+The code below fails when compiled:
 #+begin_src c++
   #include <iostream>
   #include <fstream>
@@ -56,7 +57,6 @@ A: The code attempts to write the string ~"Hello, World"~ to an ~ifstream~ objec
   }
 
 #+end_src
-fails when compiled:
 #+begin_src
   pop-quiz-2.cpp: In function ‘int main()’:
   pop-quiz-2.cpp:11:12: error: no match for ‘operator<<’ (operand types are ‘std::ifstream’ {aka ‘std::basic_ifstream<char>’} and ‘const char [14]’)
@@ -105,7 +105,7 @@ A: After runnining the statements, the values of ~number~ and ~ch~ are the integ
   }
 
 #+end_src
-Prints these to the display terminal:
+Output:
 #+begin_src
   number: 6
   ch: ,
@@ -126,7 +126,7 @@ Q: A programmer has read half of the lines in a file.  What must the programmer 
 
 A: After reading the first line, the programmer must invoke ~in_file.seekg(0)~ to position the cursor back into the beginning of file.
 *** To Illustrate
-Suppost a text file named ~pop-quiz-5-.txt~ contains the text:
+Suppose a text file named ~pop-quiz-5.txt~ contains the text:
 #+begin_src
   A line of text.
   Another line of text.
@@ -149,12 +149,6 @@ This code:
       cerr << "File failed to open.\n";
       exit(1);
     }
-
-    // The text file "pop-quiz-5.txt" contains the text:
-    // """
-    // A line of text.
-    // Another line of text.
-    // """
 
     // Read until first newline.
     while (! in_file.eof()) {
