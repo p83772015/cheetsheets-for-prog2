@@ -1,19 +1,41 @@
 #+TITLE: C++ Files and Streams
-* Classes
+
+* C++ Files and Streams
+:PROPERTIES:
+:TOC:      :include all
+:END:
+
+:CONTENTS:
++ [[#c-files-and-streams][C++ Files and Streams]]
+  + [[#classes][Classes]]
+  + [[#header-files][Header files]]
+  + [[#standard-syntax][Standard syntax]]
+    + [[#available-mode-flags][Available mode flags]]
+  + [[#basic-usage][Basic usage]]
+    + [[#write-to-a-file][Write to a file]]
+    + [[#append-to-a-file][Append to a file]]
+    + [[#read-from-a-file][Read from a file]]
+    + [[#check-if-a-file-stream-is-open][Check if a file stream is open]]
+    + [[#file-io-with-checks-on-open][File I/O with checks on open]]
+    + [[#check-for-the-end--of-the-file-eof][Check for the end  of the file (eof)]]
+    + [[#close-a-file-stream][Close a file stream]]
+:END:
+
+** Classes
 - ~ofstream~ :: Class to *Write* on files.
 - ~ifstream~ :: Class to *Read* from files.
 - ~fstream~ :: Class to *Both read and write* from/to files.
-* Header files
+** Header files
 - ~<iostream>~
 - ~<fstream>~
-* Standard syntax
+** Standard syntax
 #+begin_src c++
   steamobject.open(filename, mode_flag);
   // Open the first argument FILENAME for writing/reading. The second
   // argument MODE_FLAG determines the operation by which to perform on
   // FILENAME.
   #+end_src
-** Available mode flags
+*** Available mode flags
 | Mode Flag  | Description                                           | Used for?          |
 |------------+-------------------------------------------------------+--------------------|
 | ~ios::app~   | append only at the end of a file                      | ~ofstream~           |
@@ -22,8 +44,8 @@
 | ~ios::out~   | write to a file; previous text of file is overwritten | ~fstream~            |
 | ~ios::trunc~ | write to a file; remove old contents first            | ~ofstream~ or ~fstream~ |
 |            |                                                       |                    |
-* Basic usage
-** Write to a file
+** Basic usage
+*** Write to a file
 Remember to include ~<fstream>~
 #+begin_src c++
   ofstream outfile;		// Create an ‘outstream’ object.
@@ -38,7 +60,7 @@ Output:
   ~ $ cat filedata.txt			       # Read ‘filedata.txt’
   Hello World!
 #+end_src
-** Append to a file
+*** Append to a file
 #+begin_src c++
   ofstream outfile;		// Create an ‘outstream’ object.
   outfile.open("filedata.txt", ios::app); // Pass ‘ios::app’ as second argument
@@ -53,7 +75,7 @@ Output:
   Hello World!
   Bye World!
 #+end_src
-** Read from a file
+*** Read from a file
 Remember to include ~<fstream>~
 #+begin_src c++
   char data[100];
@@ -72,7 +94,7 @@ Remember to include ~<fstream>~
   // Close file object.
   infile.close();
 #+end_src
-** Check if a file stream is open
+*** Check if a file stream is open
 Remember to include ~<fstream>~
 #+begin_src c++
   ofstream myfile("example.txt");
@@ -84,7 +106,7 @@ Remember to include ~<fstream>~
   else cout << "Unable to open file";
   return 0;
 #+end_src
-** File I/O with checks on open
+*** File I/O with checks on open
 #+begin_src c++
   ifstream inStream;
   ofstream outStream;
@@ -114,7 +136,7 @@ Remember to include ~<fstream>~
   outStream.close();
 
 #+end_src
-** Check for the end  of the file (eof)
+*** Check for the end  of the file (eof)
 #+begin_src c++
 #include <iostream>
 #include <fstream>
@@ -168,7 +190,7 @@ main ()
   return 0;
 }
 #+end_src
-** Close a file stream
+*** Close a file stream
 Is is always a good practice that a programmer should close all the opened files before program termination.
 #+begin_src c++
   void close();
