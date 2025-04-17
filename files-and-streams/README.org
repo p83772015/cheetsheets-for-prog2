@@ -46,10 +46,15 @@
 *** Write to a file
 Remember to include ~<fstream>~
 #+begin_src c++
-  ofstream outfile;		// Create an ‘outstream’ object.
-  outfile.open("filedata.txt");	// Open the file.
-  outfile << "Hello World!\n";	// Write string to file.
-  outfile.close();		// Close the ‘ofstream’ object.
+  int main()
+  {
+    ofstream outfile;		// Create an ‘outstream’ object.
+    outfile.open("filedata.txt");	// Open the file.
+    outfile << "Hello World!\n";	// Write string to file.
+    outfile.close();		// Close the ‘ofstream’ object.
+
+    return 0;
+  }
 #+end_src
 Output:
 #+begin_src sh
@@ -60,10 +65,15 @@ Output:
 #+end_src
 *** Append to a file
 #+begin_src c++
-  ofstream outfile;		// Create an ‘outstream’ object.
-  outfile.open("filedata.txt", ios::app); // Pass ‘ios::app’ as second argument
-  outfile << "Bye World!\n";	    // Write string to file.
-  outfile.close();		// Close the ‘ofstream’ object.  
+  int main()
+  {
+    ofstream outfile;		// Create an ‘outstream’ object.
+    outfile.open("filedata.txt", ios::app); // Pass ‘ios::app’ as second argument
+    outfile << "Bye World!\n";	    // Write string to file.
+    outfile.close();		// Close the ‘ofstream’ object.  
+
+    return 0;
+  }
 #+end_src
 Output:
 #+begin_src sh
@@ -76,63 +86,76 @@ Output:
 *** Read from a file
 Remember to include ~<fstream>~
 #+begin_src c++
-  char data[100];
+  int main()
+  {
+    char data[100];
 
-  ifstream infile;		// Create an ‘instream’ object.
-  infile.open("filedata.txt");	// Open the file.
+    ifstream infile;		// Create an ‘instream’ object.
+    infile.open("filedata.txt");	// Open the file.
 
-  // Read the file one time.
-  infile >> data;			// Read the file.
-  cout << data << endl;		// Dispal the final contents.
+    // Read the file one time.
+    infile >> data;			// Read the file.
+    cout << data << endl;		// Dispal the final contents.
 
-  // Read the file one more time.
-  infile >> data; 		// Read the file.
-  cout << data << endl; 		// Display the file contents
+    // Read the file one more time.
+    infile >> data; 		// Read the file.
+    cout << data << endl; 		// Display the file contents
 
-  // Close file object.
-  infile.close();
+    // Close file object.
+    infile.close();
+
+    return 0;
+  }
 #+end_src
 *** Check if a file stream is open
 Remember to include ~<fstream>~
 #+begin_src c++
-  ofstream myfile("example.txt");
-  if (myfile.is_open()) {
-    myfile << "This is a line.\n";
-    myfile << "This is another line.\n";
-    myfile.close();
+  int main()
+  {
+    ofstream myfile("example.txt");
+    if (myfile.is_open()) {
+      myfile << "This is a line.\n";
+      myfile << "This is another line.\n";
+      myfile.close();
+    }
+    else cout << "Unable to open file";
+
+    return 0;
   }
-  else cout << "Unable to open file";
-  return 0;
 #+end_src
 *** File I/O with checks on open
 #+begin_src c++
-  ifstream inStream;
-  ofstream outStream;
+  int main()
+  {
+    ifstream inStream;
+    ofstream outStream;
 
-  // Exit the program if opening "infile.txt" for reading fails.
-  inStream.open("infile.txt");
-  if (inStream.fail()) {
-    cout << "Input file opening failed.\n";
-    exit(1);
+    // Exit the program if opening "infile.txt" for reading fails.
+    inStream.open("infile.txt");
+    if (inStream.fail()) {
+      cout << "Input file opening failed.\n";
+      exit(1);
+    }
+
+    // Exit the program if opening  "outfile.txt" for writing fails.
+    outStream.open("outfile.txt");
+    if (outStream.fail()) {
+      cout << "Output file opening failed.\n";
+      exit(1);
+    }
+
+    // Run only if opening both "infile.txt" and "outfile.txt" succeeds.
+    int first, second, third;
+    inStream >> first >> second >> third;
+    outStream << "The sum of the first 3\n"
+              << "numbers in infile.txt\n"
+              << "is " << (first + second + third) << endl;
+
+    inStream.close();
+    outStream.close();
+
+    return 0;
   }
-
-  // Exit the program if opening  "outfile.txt" for writing fails.
-  outStream.open("outfile.txt");
-  if (outStream.fail()) {
-    cout << "Output file opening failed.\n";
-    exit(1);
-  }
-
-  // Run only if opening both "infile.txt" and "outfile.txt" succeeds.
-  int first, second, third;
-  inStream >> first >> second >> third;
-  outStream << "The sum of the first 3\n"
-            << "numbers in infile.txt\n"
-            << "is " << (first + second + third) << endl;
-
-  inStream.close();
-  outStream.close();
-
 #+end_src
 *** Check for the end  of the file (eof)
 #+begin_src c++
