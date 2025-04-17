@@ -36,7 +36,7 @@ Q: What is wrong with the following code?
 #+end_src
 A: The code attempts to write the string ~"Hello, World"~ to an ~ifstream~ object.  Objects created using ~ifstream~ are read-only; it does not allow writing.
 *** To Illustrate
-The code below fails when compiled:
+The code below:
 #+begin_src c++
   #include <iostream>
   #include <fstream>
@@ -49,14 +49,12 @@ The code below fails when compiled:
 
     out_file.open("output.txt");
     out_file << "Hello, World!" << endl;
-    // if (out_file.fail()) {
-    //   cerr << "File failed to open.\n";
-    //   exit(1);
-    // }
+
     return 0;
   }
 
 #+end_src
+fails when compiled.
 #+begin_src
   pop-quiz-2.cpp: In function ‘int main()’:
   pop-quiz-2.cpp:11:12: error: no match for ‘operator<<’ (operand types are ‘std::ifstream’ {aka ‘std::basic_ifstream<char>’} and ‘const char [14]’)
@@ -78,6 +76,7 @@ Q: Suppose the input stream contains the characters ~6,995.0~.  What is the valu
 
 A: After runnining the statements, the values of ~number~ and ~ch~ are the integer ~6~ (six) and the character ~,~ (colon).
 *** To Illustrate
+The code below,
 #+begin_src c++
   #include <iostream>
   #include <fstream>
@@ -105,7 +104,7 @@ A: After runnining the statements, the values of ~number~ and ~ch~ are the integ
   }
 
 #+end_src
-Output:
+prints
 #+begin_src
   number: 6
   ch: ,
@@ -170,7 +169,7 @@ This code:
   }
 
 #+end_src
-Will print:
+prints
 #+begin_src
   A line of text.
   A line of text.
