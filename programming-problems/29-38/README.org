@@ -62,15 +62,16 @@ Suppose ~29-floats.txt~ contains:
 
 The code will output:
 
-#+RESULTS: problem29.cpp
-: Welcome to Number Averager Program!
-: 
-: This program computes the average of numbers in FILE.
-: Numbers in FILE may be delimited by any whitespace
-: character.
-: 
-: Enter FILE: 29-floats.txt
-: The average of numbers in '29-floats.txt' is: 8.12
+#+begin_example
+Welcome to Number Averager Program!
+
+This program computes the average of numbers in FILE.
+Numbers in FILE may be delimited by any whitespace
+character.
+
+Enter FILE: 29-floats.txt
+The average of numbers in '29-floats.txt' is: 8.12
+#+end_example
 
 ** problem30.cpp
 Write a program that reads each line in a file, reverses its characters, and writes the resulting line to another file.  Suppose the user specifies ~input.txt~ and ~output.txt~ when prompted for the file names, and ~input.txt~ contains the lines
