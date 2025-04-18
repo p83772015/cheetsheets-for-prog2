@@ -9,7 +9,8 @@ Write a program that reads a file containing floating-point numbers.  Print the 
   using namespace std;
 
   double
-  compute_avg_from_file(fstream *file_obj) {
+  compute_avg_from_file(fstream *file_obj)
+  {
     double total = 0;
     size_t count = 0;
     double num;
