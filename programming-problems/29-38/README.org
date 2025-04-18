@@ -177,10 +177,12 @@ Welcome to Text Flipper Program!
 
 Horizontally flip a text file.
 
-Enter input FILE: mary-had.txt
-Enter output FILE: reversed-mary-had.txt
-Flipping done! Please Check the file 'reversed-mary-had.txt'.
+Enter input FILE: input.txt
+Enter output FILE: output.txt
+Flipping done! Please Check the file 'output.txt'.
 #+end_example
+
+And ~output.txt~ will contain:
 
 #+begin_src shell
 user@host:cpp $ cat reversed-mary-had.txt 
@@ -188,7 +190,6 @@ bmal elttil a dah yraM
 wons sa etihw saw eceelf stI
 tnew yraM taht erehwyreve dnA
 .og ot erus saw bmal eht
-user@host:cpp $ reversed-mary-had.txt
 #+end_src
 
 *** Resources
