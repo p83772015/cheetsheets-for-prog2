@@ -52,6 +52,8 @@ Write a program that reads a file containing floating-point numbers.  Print the 
   }
 #+end_src
 
+Output:
+
 #+RESULTS: problem29.cpp
 : Welcome to Number Averager Program!
 : 
@@ -59,7 +61,8 @@ Write a program that reads a file containing floating-point numbers.  Print the 
 : Numbers in FILE may be delimited by any whitespace
 : character.
 : 
-: Enter FILE: The average of numbers in '29-floats.txt' is: 8.12
+: Enter FILE: 29-floats.txt
+: The average of numbers in '29-floats.txt' is: 8.12
 
 ** problem30.cpp
 Write a program that reads each line in a file, reverses its characters, and writes the resulting line to another file.  Suppose the user specifies ~input.txt~ and ~output.txt~ when prompted for the file names, and ~input.txt~ contains the lines
