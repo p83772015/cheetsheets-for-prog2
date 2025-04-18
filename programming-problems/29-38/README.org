@@ -15,7 +15,6 @@ Write a program that reads a file containing floating-point numbers.  Print the 
     double total = 0;
     size_t count = 0;
     double num;
-    // https://stackoverflow.com/a/20372777
     while (*file_obj >> num) {
       total += num;
       ++count;
@@ -111,9 +110,7 @@ tnew yraM taht erehwyreve dnA
   flip_text_file(fstream *file_obj, fstream *flipped_file_obj)
   {
     string line;
-    // https://www.geeksforgeeks.org/read-a-file-line-by-line-in-cpp/?ref=asr5
     while (getline(*file_obj, line)) {
-      // https://www.geeksforgeeks.org/how-to-reverse-a-string-in-cpp/
       reverse(line.begin(), line.end());
       ,*flipped_file_obj << line << '\n';
     }
