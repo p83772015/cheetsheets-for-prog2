@@ -77,6 +77,9 @@ Enter FILE: 29-floats.txt
 The average of numbers in '29-floats.txt' is: 8.12
 #+end_example
 
+*** Resources
+- https://stackoverflow.com/a/20372777
+
 ** problem30.cpp
 Write a program that reads each line in a file, reverses its characters, and writes the resulting line to another file.  Suppose the user specifies ~input.txt~ and ~output.txt~ when prompted for the file names, and ~input.txt~ contains the lines
 
@@ -159,6 +162,8 @@ tnew yraM taht erehwyreve dnA
   }
 #+end_src
 
+*** Sample output
+
 Suppose ~input.txt~ contains:
 
 #+begin_example
@@ -188,6 +193,10 @@ tnew yraM taht erehwyreve dnA
 .og ot erus saw bmal eht
 user@host:cpp $ reversed-mary-had.txt
 #+end_src
+
+*** Resources
+- https://www.geeksforgeeks.org/read-a-file-line-by-line-in-cpp/?ref=asr5
+- https://www.geeksforgeeks.org/how-to-reverse-a-string-in-cpp/
 
 ** problem31.cpp
 Write a program that will search a file of numbers of type ~int~ and write the largest and the smallest numbers to the screen.  The file contains nothing but numbers separated line breaks.
