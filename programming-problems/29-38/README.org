@@ -52,7 +52,15 @@ Write a program that reads a file containing floating-point numbers.  Print the 
   }
 #+end_src
 
-Output:
+Suppose ~29-floats.txt~ contains:
+
+#+begin_example
+3
+5.6
+23.1 4.7 4.2
+#+end_example
+
+The code will output:
 
 #+RESULTS: problem29.cpp
 : Welcome to Number Averager Program!
