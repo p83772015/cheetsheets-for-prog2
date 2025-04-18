@@ -1,0 +1,113 @@
+* Programming Problems 29-38
+** problem29.cpp
+Write a program that reads a file containing floating-point numbers.  Print the average of the numbers in the file.  Prompt the user for the file name.
+
+#+NAME: problem29.cpp
+#+begin_src c++ :results output
+  #include <iostream>
+  #include <fstream>
+  using namespace std;
+
+  double
+  compute_avg_from_file(fstream *file_obj) {
+    double total = 0;
+    size_t count = 0;
+    double num;
+    // https://stackoverflow.com/a/20372777
+    while (*file_obj >> num) {
+      total += num;
+      ++count;
+    }
+    return total / count;
+  }
+
+  int
+  main ()
+  {
+    fstream file_obj;
+    string file_name;
+
+    cout << "Welcome to Number Averager Program!\n"
+         << "\n"
+         << "This program computes the average of numbers in FILE.\n"
+         << "Numbers in FILE may be delimited by any whitespace\n"
+         << "character.\n"
+         << "\n"
+         << "Enter FILE: ";
+    cin >> file_name;
+
+    // Open the text file.
+    file_obj.open(file_name, ios::in);
+    if (file_obj.fail()) {
+      cerr << "File failed to open.\n";
+      exit(1);
+    }
+
+    // Compute and print result
+    cout << "The average of numbers in '" << file_name
+         << "' is: " << compute_avg_from_file(&file_obj)
+         << '\n';
+
+    return 0;
+  }
+#+end_src
+
+** problem30.cpp
+Write a program that reads each line in a file, reverses its characters, and writes the resulting line to another file.  Suppose the user specifies ~input.txt~ and ~output.txt~ when prompted for the file names, and ~input.txt~ contains the lines
+
+#+begin_example
+Mary had a little lamb
+Its fleece was white as snow
+And everywhere that Mary went
+the lamb was sure to go.
+#+end_example
+
+After the program is finished, ~output.txt~ should contain
+
+#+begin_example
+bmal elttil a dah yraM
+wons sa etihw saw eceelf stI
+tnew yraM taht erehwyreve dnA
+.og ot erus saw bmal ehT
+#+end_example
+
+** problem31.cpp
+Write a program that will search a file of numbers of type ~int~ and write the largest and the smallest numbers to the screen.  The file contains nothing but numbers separated line breaks.
+
+** problem32.cpp
+Write a program that merges the numbers in two files and writes all the numbers into a third file.  Your program takes input from two different files and writes its output to a third file.  Each input file contains a list of numbers of type ~int~ in sorted order from the smallest to the largest.  After the program is run, the output file will contain all the numbers in the two input files in one longer list in sorted order from smallest to largest.  Your program should define a function that will sort the values of the two input files.
+
+** problem33.cpp
+Write a program to compute numeric grades for a course.  The course records are in a file that will serve as the input file.  The input file is in the following format: Each line contains a student’s last name, then one space, then the student’s first name, then one space, then ten quiz scores all on one line.  The quiz scores are whole numbers and are separated by one space.  Make a list of 10 students in the input file.  Your program will take its input from this file and send its output to a second file.  The data in the output file will be the same as the data in the input file except that there will be one additional number (of type double ) at the end of each line.  This number will be the average of the student’s ten quiz scores.  Write a function that computes the average of each individual student.
+
+** problem34.cpp
+Create a program to read a file (~data.txt~) with a set of numbers then the program will determine the odd numbers and even numbers in the file.  Print the odd numbers in the file called ~odd.txt~ and even numbers in the file called ~even.txt~.
+
+** problem35.cpp
+Boardman College maintains two files—one for Sociology majors and another for Anthropology majors.  Each file contains students’ ID numbers, last names, first names, and grade point averages.  Each file is in student ID number order.
+
+The college is merging the two departments into a Department of Sociology and Anthropology.  Design the logic for a program that merges the two files into one file containing a list of all students, maintaining ID number order.
+
+** problem36.cpp
+The Apgar Medical group keeps a patient file for each doctor in the office.  Each record contains the patient’s first and last name, home address, and birth year.  The records are sorted in ascending birth year order.  Two doctors, Dr.  Best and Dr.  Cushing, have formed a partnership.
+
+Create a program that produces a file of merged list of patients’ names in ascending order by birth year.
+
+Create another file that it does not display patients’ names, but only produces a count of the number of patients born each year.
+
+** problem37.cpp
+The MartinWeight Loss Clinic maintains a patient file, each record contains the name of a patient, its gender and current total weight loss in pounds.
+
+Create a function that separates the client file to produce two files — one for male clients and one for female clients.
+
+Each file is in descending weight loss order.
+
+** problem38.cpp
+Create a file containing the following names, Social Security numbers, hourly rate, and hours worked.
+
+| Eddie Vedder  | 555-98-4182 | 7.32 | 37 |
+| Scott Weiland | 555-53-2147 | 8.32 | 40 |
+| Axl Rose      | 555-32-9826 | 6.54 | 40 |
+| Phil Anselmo  | 555-09-4263 | 9.80 | 35 |
+
+Write a C++ program that reads the data file and computes and displays a payroll schedule.  The output should list the Name, Social Security Number and Gross pay for every individual.
