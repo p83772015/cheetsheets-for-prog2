@@ -96,6 +96,99 @@ tnew yraM taht erehwyreve dnA
 .og ot erus saw bmal ehT
 #+end_example
 
+*** Answer
+
+#+begin_src C++ :results output :cmdline :exports both
+  #include <iostream>
+  #include <fstream>
+  #include <algorithm>
+  using namespace std;
+
+  void
+  flip_text_file(fstream *file_obj, fstream *flipped_file_obj)
+  {
+    string line;
+    // https://www.geeksforgeeks.org/read-a-file-line-by-line-in-cpp/?ref=asr5
+    while (getline(*file_obj, line)) {
+      // https://www.geeksforgeeks.org/how-to-reverse-a-string-in-cpp/
+      reverse(line.begin(), line.end());
+      ,*flipped_file_obj << line << '\n';
+    }
+  }  
+
+  int
+  main ()
+  {
+    fstream file_obj;
+    fstream flipped_file_obj;
+    string file_name;
+    string flipped_file_name;
+
+    cout << "Welcome to Text Flipper Program!\n"
+         << "\n"
+         << "Horizontally flip a text file.\n"
+         << "\n"
+         << "Enter input FILE: ";
+
+    // Open the text file for reading.
+    cin >> file_name;		// Prompt for text file for reading.
+    file_obj.open(file_name, ios::in);
+    if (file_obj.fail()) {
+      cerr << "File for reading failed to open.\n";
+      exit(1);
+    }
+
+    // Open the text file for writing.
+    cout << "Enter output FILE: ";
+    cin >> flipped_file_name;		// Prompt for text file for writing.
+    flipped_file_obj.open(flipped_file_name, ios::out);
+    if (flipped_file_obj.fail()) {
+      cerr << "File for writing failed to open.\n";
+      exit(1);
+    }
+
+    // Notify user if done!
+    flip_text_file(&file_obj, &flipped_file_obj);
+    cout << "Flipping done! Please Check the file '"
+         << flipped_file_name << "'.\n";
+
+    // Cleanup
+    file_obj.close();
+    flipped_file_obj.close();
+    return 0;
+  }
+#+end_src
+
+Suppose ~input.txt~ contains:
+
+#+begin_example
+Mary had a little lamb
+Its fleece was white as snow
+And everywhere that Mary went
+the lamb was sure to go.
+#+end_example
+
+The code will output:
+
+#+begin_example
+Welcome to Text Flipper Program!
+
+Horizontally flip a text file.
+
+Enter input FILE: mary-had.txt
+Enter output FILE: reversed-mary-had.txt
+Flipping done! Please Check the file 'reversed-mary-had.txt'.
+#+end_example
+
+#+begin_src shell
+user@host:cpp $ cat reversed-mary-had.txt 
+bmal elttil a dah yraM
+wons sa etihw saw eceelf stI
+tnew yraM taht erehwyreve dnA
+.og ot erus saw bmal eht
+user@host:cpp $ reversed-mary-had.txt
+#+end_src
+
 ** problem31.cpp
 Write a program that will search a file of numbers of type ~int~ and write the largest and the smallest numbers to the screen.  The file contains nothing but numbers separated line breaks.
 
