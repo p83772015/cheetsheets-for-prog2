@@ -2,6 +2,7 @@
 ** problem29.cpp
 Write a program that reads a file containing floating-point numbers.  Print the average of the numbers in the file.  Prompt the user for the file name.
 
+*** Answer
 #+NAME: problem29.cpp
 #+begin_src C++ :results output :cmdline <<< 29-floats.txt :exports both
   #include <iostream>
@@ -53,6 +54,7 @@ Write a program that reads a file containing floating-point numbers.  Print the 
   }
 #+end_src
 
+*** Sample output
 Suppose ~29-floats.txt~ contains:
 
 #+begin_example
