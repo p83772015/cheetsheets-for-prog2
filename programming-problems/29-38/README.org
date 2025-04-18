@@ -50,6 +50,7 @@ Write a program that reads a file containing floating-point numbers.  Print the 
          << "' is: " << compute_avg_from_file(&file_obj)
          << '\n';
 
+    file_obj.close();
     return 0;
   }
 #+end_src
