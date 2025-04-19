@@ -555,6 +555,7 @@ The code will create a file named ~problem-32-output.txt~ containing these value
 ** problem33.cpp
 Write a program to compute numeric grades for a course.  The course records are in a file that will serve as the input file.  The input file is in the following format: Each line contains a student’s last name, then one space, then the student’s first name, then one space, then ten quiz scores all on one line.  The quiz scores are whole numbers and are separated by one space.  Make a list of 10 students in the input file.  Your program will take its input from this file and send its output to a second file.  The data in the output file will be the same as the data in the input file except that there will be one additional number (of type double ) at the end of each line.  This number will be the average of the student’s ten quiz scores.  Write a function that computes the average of each individual student.
 
+*** Solution
 #+begin_src C++
   #include <iostream>
   #include <fstream>
@@ -668,8 +669,7 @@ Write a program to compute numeric grades for a course.  The course records are 
   }
 #+end_src
 
-** Sample output
-
+*** Sample output
 Terminal output:
 
 #+begin_example
@@ -714,6 +714,10 @@ Camasis Ace 89 84 85 97 86 82 89 96 84 99 89.1
 Rabosa Adian 89 99 88 99 94 98 82 89 88 95 92.1
 Zape Ben 96 96 81 81 99 99 99 90 86 93 92
 #+end_example
+
+*** Resources
+- https://stackoverflow.com/questions/6417817/easy-way-to-remove-extension-from-a-filename
+- https://stackoverflow.com/questions/56524609/warning-iso-c-forbids-converting-a-string-constant-to-char-wwrite-string
 
 ** problem34.cpp
 Create a program to read a file (~data.txt~) with a set of numbers then the program will determine the odd numbers and even numbers in the file.  Print the odd numbers in the file called ~odd.txt~ and even numbers in the file called ~even.txt~.
