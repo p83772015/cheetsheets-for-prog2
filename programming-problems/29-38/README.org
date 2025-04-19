@@ -549,6 +549,10 @@ The code will create a file named ~problem-32-output.txt~ containing these value
 
 *** Resources
 - https://www.geeksforgeeks.org/bubble-sort-algorithm/
+- https://www.geeksforgeeks.org/c-bubble-sort/
+- https://www.geeksforgeeks.org/return-an-array-in-c/#return-an-array-in-c-using-pointers
+- https://stackoverflow.com/questions/36433798/c-malloc-invalid-conversion-from-void-to-struct
+- https://www.geeksforgeeks.org/structures-c/
 
 ** problem33.cpp
 Write a program to compute numeric grades for a course.  The course records are in a file that will serve as the input file.  The input file is in the following format: Each line contains a student’s last name, then one space, then the student’s first name, then one space, then ten quiz scores all on one line.  The quiz scores are whole numbers and are separated by one space.  Make a list of 10 students in the input file.  Your program will take its input from this file and send its output to a second file.  The data in the output file will be the same as the data in the input file except that there will be one additional number (of type double ) at the end of each line.  This number will be the average of the student’s ten quiz scores.  Write a function that computes the average of each individual student.
