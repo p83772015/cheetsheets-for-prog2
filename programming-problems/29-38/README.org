@@ -204,10 +204,10 @@ Write a program that will search a file of numbers of type ~int~ and write the l
   using namespace std;
 
   int *
-  find_lo_hi_in_file(fstream *file_obj)
+  find_min_max_in_file(fstream *file_obj)
   {
     int line;
-    int *hi_lo_tuple = (int *)malloc(2 * sizeof(int));
+    int *min_max_tuple = (int *)malloc(2 * sizeof(int));
     int highest;
     ,*file_obj >> highest;
     int lowest = highest;
@@ -215,9 +215,9 @@ Write a program that will search a file of numbers of type ~int~ and write the l
       (highest < line) && (highest = line);
       (lowest > line) && (lowest = line);
     }
-    hi_lo_tuple[0] = lowest;
-    hi_lo_tuple[1] = highest;
-    return hi_lo_tuple;
+    min_max_tuple[0] = lowest;
+    min_max_tuple[1] = highest;
+    return min_max_tuple;
   }
 
   int
@@ -225,7 +225,7 @@ Write a program that will search a file of numbers of type ~int~ and write the l
   {
     fstream file_obj;
     string file_name;
-    int *lo_hi;
+    int *min_max;
 
     cout << "Welcome to Min-Max Program!\n"
          << "\n"
@@ -242,9 +242,9 @@ Write a program that will search a file of numbers of type ~int~ and write the l
     }
 
     // Compute and print result
-    lo_hi = find_lo_hi_in_file(&file_obj);
-    cout << "Smallest integer: " << lo_hi[0] << '\n'
-         << "Largest integer: " << lo_hi[1] << '\n';
+    min_max = find_min_max_in_file(&file_obj);
+    cout << "Smallest integer: " << min_max[0] << '\n'
+         << "Largest integer: " << min_max[1] << '\n';
 
     // Cleanup
     file_obj.close();
