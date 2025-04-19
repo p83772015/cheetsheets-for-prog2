@@ -733,6 +733,7 @@ Zape Ben 96 96 81 81 99 99 99 90 86 93 92
 ** problem34.cpp
 Create a program to read a file (~data.txt~) with a set of numbers then the program will determine the odd numbers and even numbers in the file.  Print the odd numbers in the file called ~odd.txt~ and even numbers in the file called ~even.txt~.
 
+*** Solution
 #+begin_src C++
   #include <iostream>
   #include <fstream>
@@ -807,7 +808,7 @@ Create a program to read a file (~data.txt~) with a set of numbers then the prog
   }
 #+end_src
 
-** Sample output
+*** Sample output
 #+begin_example
 Welcome to Odd and Even Finder Program!
 
