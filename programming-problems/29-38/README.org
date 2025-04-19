@@ -497,6 +497,19 @@ Write a program that merges the numbers in two files and writes all the numbers 
 
 *** Sample Output
 
+#+begin_example
+Welcome to Files of Integers Merger Program!
+
+Merge sorted numbers from FILE1 and FILE2.
+Output is dumped on FILE3 in ascending order.
+
+Enter file name of FILE1: problem-32-numbers-1.txt
+Enter file name of FILE2: problem-32-numbers-2.txt
+Enter file name of FILE3: problem-32-output.txt
+
+Done! Please Check the file 'problem-32-output.txt'.
+#+end_example
+
 Suppose ~problem-32-numbers-1.txt~ contains:
 
 #+begin_example
@@ -515,21 +528,6 @@ And ~problem-32-numbers-2.txt~ contains:
 34
 75
 89
-#+end_example
-
-When run:
-
-#+begin_example
-Welcome to Files of Integers Merger Program!
-
-Merge sorted numbers from FILE1 and FILE2.
-Output is dumped on FILE3 in ascending order.
-
-Enter file name of FILE1: problem-32-numbers-1.txt
-Enter file name of FILE2: problem-32-numbers-2.txt
-Enter file name of FILE3: problem-32-output.txt
-
-Done! Please Check the file 'problem-32-output.txt'.
 #+end_example
 
 The code will create a file named ~problem-32-output.txt~ containing these values:
