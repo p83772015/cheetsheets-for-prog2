@@ -733,6 +733,137 @@ Zape Ben 96 96 81 81 99 99 99 90 86 93 92
 ** problem34.cpp
 Create a program to read a file (~data.txt~) with a set of numbers then the program will determine the odd numbers and even numbers in the file.  Print the odd numbers in the file called ~odd.txt~ and even numbers in the file called ~even.txt~.
 
+#+begin_src C++
+  #include <iostream>
+  #include <fstream>
+  using namespace std;
+
+  void
+  export_odd_even(fstream *input_file_obj)
+  {
+    fstream even_file_obj;
+    fstream odd_file_obj;
+    int num;
+
+    while (*input_file_obj >> num) {
+      if (num % 2 == 0) {
+        // This branch runs if `num` is even.
+        if (!even_file_obj.is_open()) {
+  	// Open `even.txt` only if `num % 2 == 0`.
+  	even_file_obj.open("even.txt", ios::out);
+  	if (even_file_obj.fail()) {
+  	  cerr << "File for writing failed to open.\n";
+  	  exit(1);
+  	}
+        }
+        even_file_obj << num << '\n';
+      } else {
+        // This branch runs if `num` is odd.
+        if (!odd_file_obj.is_open()) {
+  	// Open `odd.txt` only if `num % 2 != 0`.
+  	odd_file_obj.open("odd.txt", ios::out);
+  	if (odd_file_obj.fail()) {
+  	  cerr << "File for writing failed to open.\n";
+  	  exit(1);
+  	}
+        }
+        odd_file_obj << num << '\n';
+      }
+    }
+
+    even_file_obj.close();
+    odd_file_obj.close();
+  }
+
+  int
+  main ()
+  {
+    fstream input_file_obj;
+    string input_file_name;
+
+    cout << "Welcome to Odd and Even Finder Program!\n"
+         << "\n"
+         << "Find in FILE all the odd and even numbers.\n"
+         << "Results are put to odd.txt and even.txt.\n"
+         << "\n"
+         << "Enter input FILE: ";
+
+    // Open the text file for reading.
+    cin >> input_file_name;		// Prompt for text file for reading.
+    input_file_obj.open(input_file_name, ios::in);
+    if (input_file_obj.fail()) {
+      cerr << "File for reading failed to open.\n";
+      exit(1);
+    }
+
+    // Notify user if done!
+    export_odd_even(&input_file_obj);
+    cout << "Finding done! Please Check the files 'odd.txt' and 'even.txt'."
+         << '\n';
+
+    // Cleanup
+    input_file_obj.close();
+    return 0;
+  }
+#+end_src
+
+** Sample output
+#+begin_example
+Welcome to Odd and Even Finder Program!
+
+Find in FILE all the odd and even numbers.
+Results are put to odd.txt and even.txt.
+
+Enter input FILE: 34-numbers.txt
+Finding done! Please Check the files 'odd.txt' and 'even.txt'.
+#+end_example
+
+With ~34-numbers.txt~ containing:
+
+#+begin_example
+34 35 89
+20
+44 64
+73 6 7 61 13 64
+65
+19
+91 61
+51
+4
+21
+0 
+#+end_example
+
+Running the program will create ~odd.txt~ containing:
+
+#+begin_example
+35
+89
+73
+7
+61
+13
+65
+19
+91
+61
+51
+21
+#+end_example
+
+and ~even.txt~ containing:
+
+#+begin_example
+34
+20
+44
+64
+6
+64
+4
+0
+#+end_example
+
 ** problem35.cpp
 Boardman College maintains two files—one for Sociology majors and another for Anthropology majors.  Each file contains students’ ID numbers, last names, first names, and grade point averages.  Each file is in student ID number order.
 
