@@ -296,6 +296,260 @@ Largest integer: 923
 ** problem32.cpp
 Write a program that merges the numbers in two files and writes all the numbers into a third file.  Your program takes input from two different files and writes its output to a third file.  Each input file contains a list of numbers of type ~int~ in sorted order from the smallest to the largest.  After the program is run, the output file will contain all the numbers in the two input files in one longer list in sorted order from smallest to largest.  Your program should define a function that will sort the values of the two input files.
 
+*** Solution
+#+begin_src C++
+  #include <iostream>
+  #include <fstream>
+  using namespace std;
+
+  // Implement dynamic lists (lists that grow!)
+  struct int_linked_list
+  {
+    int num;
+    struct int_linked_list *next;
+  };
+
+  struct int_linked_list *
+  initialize_int_linked_list(int num)
+  {
+    struct int_linked_list *p;
+    p = (struct int_linked_list *)malloc(sizeof(struct int_linked_list));
+
+    if (p == NULL)
+      throw new runtime_error("Ran out of storage.");
+
+    p->num = num;
+    p->next = NULL;
+
+    return p;
+  }
+
+  struct int_linked_list *
+  add_to_int_linked_list(struct int_linked_list *list_item_ptr, int num)
+  {
+    struct int_linked_list *new_item = initialize_int_linked_list(num);
+    if (list_item_ptr) new_item->next = list_item_ptr;
+    return new_item;
+  }
+
+  void
+  print_int_linked_list(struct int_linked_list *list_item_ptr)
+  {
+    while (list_item_ptr) {
+      cout << list_item_ptr->num << " ";
+      list_item_ptr = list_item_ptr->next;
+    }
+  }
+
+  size_t
+  sizeof_int_linked_list(struct int_linked_list *list_item_ptr)
+  {
+    size_t count = 0;
+    while (list_item_ptr) {
+      ++count;
+      list_item_ptr = list_item_ptr->next;
+    }
+    return count;
+  }
+
+  void
+  free_int_linked_list(struct int_linked_list *list_item_ptr)
+  {
+    while (list_item_ptr) {
+      struct int_linked_list *next_item = list_item_ptr;
+      list_item_ptr = list_item_ptr->next;
+      free(next_item);
+    }
+  }
+
+  int *
+  int_linked_list_to_array(struct int_linked_list *list_item_ptr, size_t *arrsize)
+  {
+    size_t i = 0;
+    ,*arrsize = sizeof_int_linked_list(list_item_ptr);
+    int *arr = (int *)malloc(*arrsize * sizeof(int));
+    while (list_item_ptr) {
+      arr[i] = list_item_ptr->num;
+      ++i;
+      list_item_ptr = list_item_ptr->next;
+    }
+    return arr;
+  }
+
+  struct int_linked_list *
+  append_int_linked_list(struct int_linked_list *list_item_ptr1,
+  		       struct int_linked_list *list_item_ptr2)
+  {
+    if (!list_item_ptr1 || !list_item_ptr2) {
+      throw runtime_error("Passed null pointer.");
+    }
+    struct int_linked_list *first_elt_ptr = list_item_ptr1;
+    while (list_item_ptr1->next) {
+      list_item_ptr1 = list_item_ptr1->next;
+    }
+    list_item_ptr1->next = list_item_ptr2;
+    return first_elt_ptr;
+  }
+
+  void
+  swap(int *a, int*b)
+  {
+    int temp = *a;
+    ,*a = *b;
+    ,*b = temp;
+  }
+
+  void
+  bubble_sort(int *arr, size_t n)
+  {
+    for (size_t i = 0; i < n - 1; ++i) {
+      for (size_t j = 0; j < n - i - 1; ++j) {
+        if (arr[j] > arr[j+1]) {
+  	swap(arr+j, arr+j+1);
+        }
+      }
+    }
+  }
+
+  void
+  merge_sort_and_dump_files_of_ints(fstream *file1_obj,
+  				  fstream *file2_obj,
+  				  fstream *file3_obj)
+  {
+    struct int_linked_list *file1_values = NULL;
+    struct int_linked_list *file2_values = NULL;
+    struct int_linked_list *file3_values = NULL;
+    size_t file3_arrsize;
+    int num;
+
+    while (*file1_obj >> num)
+      file1_values = add_to_int_linked_list(file1_values, num);
+    while (*file2_obj >> num)
+      file2_values = add_to_int_linked_list(file2_values, num);
+
+    file3_values = append_int_linked_list(file1_values, file2_values);
+    int *file3_array = int_linked_list_to_array(file3_values, &file3_arrsize);
+    bubble_sort(file3_array, file3_arrsize);
+
+    for (size_t i = 0; i < file3_arrsize; ++i) {
+      ,*file3_obj << file3_array[i] << '\n';
+    }
+
+    free_int_linked_list(file3_values);
+  }
+
+  int
+  main ()
+  {
+    fstream file_obj_1;
+    fstream file_obj_2;
+    fstream file_obj_3;
+    string file_name_1;
+    string file_name_2;
+    string file_name_3;
+
+    cout << "Welcome to Files of Integers Merger Program!\n"
+         << "\n"
+         << "Merge sorted numbers from FILE1 and FILE2.\n"
+         << "Output is dumped on FILE3 in ascending order."
+         << "\n\n";
+
+    // Open the text file 1 for reading.
+    cout << "Enter file name of FILE1: ";
+    cin >> file_name_1;		// Prompt for text file for reading.
+    file_obj_1.open(file_name_1, ios::in);
+    if (file_obj_1.fail()) {
+      cerr << "'" << file_name_1 << "' for reading failed to open.\n";
+      exit(1);
+    }
+
+    // Open the text file 2 for reading.
+    cout << "Enter file name of FILE2: ";
+    cin >> file_name_2;		// Prompt for text file for reading.
+    file_obj_2.open(file_name_2, ios::in);
+    if (file_obj_2.fail()) {
+      cerr << "'" << file_name_2 << "' for reading failed to open.\n";
+      exit(2);
+    }
+
+    // Open the text file 3 for writing.
+    cout << "Enter file name of FILE3: ";
+    cin >> file_name_3;		// Prompt for text file for reading.
+    file_obj_3.open(file_name_3, ios::out);
+    if (file_obj_3.fail()) {
+      cerr << "'" << file_name_3 << "' for writing failed to open.\n";
+      exit(3);
+    }
+
+    // Notify user if done!
+    merge_sort_and_dump_files_of_ints(&file_obj_1, &file_obj_2, &file_obj_3);
+    cout << "\nDone! Please Check the file '"
+         << file_name_3 << "'.\n";
+
+    // Cleanup
+    file_obj_1.close();
+    file_obj_2.close();
+    file_obj_3.close();
+    
+    return 0;
+  }
+#+end_src
+
+*** Sample Output
+
+Suppose ~problem-32-numbers-1.txt~ contains:
+
+#+begin_example
+29
+50
+63
+25
+77
+#+end_example
+
+And ~problem-32-numbers-2.txt~ contains:
+
+#+begin_example
+22
+21
+34
+75
+89
+#+end_example
+
+When run:
+
+#+begin_example
+Welcome to Files of Integers Merger Program!
+
+Merge sorted numbers from FILE1 and FILE2.
+Output is dumped on FILE3 in ascending order.
+
+Enter file name of FILE1: problem-32-numbers-1.txt
+Enter file name of FILE2: problem-32-numbers-2.txt
+Enter file name of FILE3: problem-32-output.txt
+
+Done! Please Check the file 'problem-32-output.txt'.
+#+end_example
+
+The code will create a file named ~problem-32-output.txt~ containing these values:
+
+#+begin_example
+21
+22
+25
+29
+34
+50
+63
+75
+77
+89
+#+end_example
+
+*** Resources
+- https://www.geeksforgeeks.org/bubble-sort-algorithm/
+
 ** problem33.cpp
 Write a program to compute numeric grades for a course.  The course records are in a file that will serve as the input file.  The input file is in the following format: Each line contains a student’s last name, then one space, then the student’s first name, then one space, then ten quiz scores all on one line.  The quiz scores are whole numbers and are separated by one space.  Make a list of 10 students in the input file.  Your program will take its input from this file and send its output to a second file.  The data in the output file will be the same as the data in the input file except that there will be one additional number (of type double ) at the end of each line.  This number will be the average of the student’s ten quiz scores.  Write a function that computes the average of each individual student.
 
