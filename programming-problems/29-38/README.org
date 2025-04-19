@@ -302,7 +302,7 @@ Write a program that merges the numbers in two files and writes all the numbers 
   #include <fstream>
   using namespace std;
 
-  // Implement dynamic lists (lists that grow!)
+  // Implement linked lists (for fun!)
   struct int_linked_list
   {
     int num;
