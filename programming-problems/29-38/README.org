@@ -595,28 +595,39 @@ Write a program to compute numeric grades for a course.  The course records are 
   void
   export_avg(fstream *input_file_obj, fstream *output_file_obj)
   {
+    // Temporary storage.
     string cell;
     string last_name;
     string first_name;
     int grades[10];
     struct quiz *quizzes[10];
 
+    // For each empty array element, build the quiz structure and assign
+    // it to a position of the quizzes array.
     for (size_t i = 0; i < 10; ++i) {
       ,*input_file_obj >> last_name;
       ,*input_file_obj >> first_name;
       for (size_t j = 0; j < 10; ++j) {
         ,*input_file_obj >> grades[j];
       }
-      quizzes[i] = init_quiz(last_name, first_name, grades);
+      quizzes[i] = init_quiz(last_name, first_name, grades); // Bulid struct.
     }
-    
+
+    // For each quiz item, write it to the file object for output.
     for (size_t i = 0; i < 10; ++i) {
       ,*output_file_obj << quizzes[i]->last_name << ' ';
       ,*output_file_obj << quizzes[i]->first_name << ' ';
+      // Iterate through the grades array field of the current quiz
+      // struct.
       for (size_t j = 0; j < 10; ++j) {
         ,*output_file_obj << quizzes[i]->grades[j] << ' ';
       }
       ,*output_file_obj << quizzes[i]->avg << '\n';
+    }
+
+    // Memory safety!
+    for (size_t i = 0; i < 10; ++i) {
+      free(quizzes[i]);
     }
 
   }
