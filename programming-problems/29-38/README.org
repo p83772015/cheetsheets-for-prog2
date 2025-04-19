@@ -555,6 +555,166 @@ The code will create a file named ~problem-32-output.txt~ containing these value
 ** problem33.cpp
 Write a program to compute numeric grades for a course.  The course records are in a file that will serve as the input file.  The input file is in the following format: Each line contains a student’s last name, then one space, then the student’s first name, then one space, then ten quiz scores all on one line.  The quiz scores are whole numbers and are separated by one space.  Make a list of 10 students in the input file.  Your program will take its input from this file and send its output to a second file.  The data in the output file will be the same as the data in the input file except that there will be one additional number (of type double ) at the end of each line.  This number will be the average of the student’s ten quiz scores.  Write a function that computes the average of each individual student.
 
+#+begin_src C++
+  #include <iostream>
+  #include <fstream>
+  using namespace std;
+
+  // A `quiz' item data structure.
+  struct quiz
+  {
+    string last_name;
+    string first_name;
+    int grades[10];
+    double avg;
+  };
+
+  // Function to initialize a `quiz' data structure.
+  struct quiz *
+  init_quiz(string last_name, string first_name, int grades[])
+  {
+    struct quiz *qs;
+    int total = 0;
+    qs = (struct quiz *)malloc(sizeof(struct quiz));
+
+    if (qs == NULL)
+      throw new runtime_error("Ran out of storage.");
+
+    qs->last_name = last_name;
+    qs->first_name = first_name;
+    for (size_t i = 0; i < 10; ++i) {
+      total += grades[i];
+      qs->grades[i] = grades[i];
+    }
+    qs->avg = total / 10.0;
+
+    return qs;
+  }
+
+  void
+  export_avg(fstream *input_file_obj, fstream *output_file_obj)
+  {
+    string cell;
+    string last_name;
+    string first_name;
+    int grades[10];
+    struct quiz *quizzes[10];
+
+    for (size_t i = 0; i < 10; ++i) {
+      ,*input_file_obj >> last_name;
+      ,*input_file_obj >> first_name;
+      for (size_t j = 0; j < 10; ++j) {
+        ,*input_file_obj >> grades[j];
+      }
+      quizzes[i] = init_quiz(last_name, first_name, grades);
+    }
+    
+    for (size_t i = 0; i < 10; ++i) {
+      ,*output_file_obj << quizzes[i]->last_name << ' ';
+      ,*output_file_obj << quizzes[i]->first_name << ' ';
+      for (size_t j = 0; j < 10; ++j) {
+        ,*output_file_obj << quizzes[i]->grades[j] << ' ';
+      }
+      ,*output_file_obj << quizzes[i]->avg << '\n';
+    }
+
+  }
+
+  int
+  main ()
+  {
+      fstream input_file_obj;
+      fstream output_file_obj;
+      string input_file_name;
+      string output_file_name;
+
+      cout << "Welcome to Quiz Averager Program!\n"
+  	 << "\n"
+  	 << "Compute the average of the students' quizzes in FILE.\n"
+  	 << "FILE should be a text file containing the records of students'\n"
+  	 << "quizzes. Records are separated by a newline; columns are\n"
+  	 << "separated by one or more white space characters.\n"
+  	 << "\n\n";
+
+      // Open the text file for reading.
+      cout << "Enter input FILE: ";
+      cin >> input_file_name;		// Prompt for text file for reading.
+      input_file_obj.open(input_file_name, ios::in);
+      if (input_file_obj.fail()) {
+        cerr << "File for reading failed to open.\n";
+        exit(1);
+      }
+
+      // Open the text file for writing.
+      output_file_name =
+        input_file_name.substr(0, input_file_name.find_last_of("."))
+        + "-with-avg.txt";
+      output_file_obj.open(output_file_name, ios::out);
+      if (output_file_obj.fail()) {
+        cerr << "File for writing failed to open.\n";
+        exit(1);
+      }
+
+      // Notify user if done!
+      export_avg(&input_file_obj, &output_file_obj);
+      cout << "Averaging done! Please Check the file '"
+  	 << output_file_name << "'.\n";
+
+      // Cleanup
+      input_file_obj.close();
+      output_file_obj.close();
+
+    return 0;
+  }
+#+end_src
+
+** Sample output
+
+Terminal output:
+
+#+begin_example
+Welcome to Quiz Averager Program!
+
+Compute the average of the students' quizzes in FILE.
+FILE should be a text file containing the records of students'
+quizzes. Records are separated by a newline; columns are
+separated by one or more white space characters.
+
+
+Enter input FILE: quizzes.txt
+Averaging done! Please Check the file 'quizzes-with-avg.txt'.
+#+end_example
+
+Contents of ~quizzes.txt~:
+
+#+begin_example
+Rey Edgar 94 81 92 93 98 97 94 92 96 80
+Caneta Angelo 96 98 88 97 99 92 90 89 83 83
+Florendo Aizle 86 87 88 93 90 98 96 95 87 84
+Leona Christian 81 88 89 93 88 91 96 96 86 82
+Aureus Karl 98 99 83 88 91 97 95 88 89 96
+Orbita Chistian 92 80 81 89 91 93 86 95 80 83
+Rey Emil 91 98 80 89 93 90 85 81 88 85
+Camasis Ace 89 84 85 97 86 82 89 96 84 99
+Rabosa Adian 89 99 88 99 94 98 82 89 88 95
+Zape Ben 96 96 81 81 99 99 99 90 86 93
+#+end_example
+
+Contents of ~quizzes-with-avg.txt~:
+
+#+begin_example
+Rey Edgar 94 81 92 93 98 97 94 92 96 80 91.7
+Caneta Angelo 96 98 88 97 99 92 90 89 83 83 91.5
+Florendo Aizle 86 87 88 93 90 98 96 95 87 84 90.4
+Leona Christian 81 88 89 93 88 91 96 96 86 82 89
+Aureus Karl 98 99 83 88 91 97 95 88 89 96 92.4
+Orbita Chistian 92 80 81 89 91 93 86 95 80 83 87
+Rey Emil 91 98 80 89 93 90 85 81 88 85 88
+Camasis Ace 89 84 85 97 86 82 89 96 84 99 89.1
+Rabosa Adian 89 99 88 99 94 98 82 89 88 95 92.1
+Zape Ben 96 96 81 81 99 99 99 90 86 93 92
+#+end_example
+
 ** problem34.cpp
 Create a program to read a file (~data.txt~) with a set of numbers then the program will determine the odd numbers and even numbers in the file.  Print the odd numbers in the file called ~odd.txt~ and even numbers in the file called ~even.txt~.
 
