@@ -278,9 +278,9 @@ Suppose the ~31-numbers.txt~ input file contains:
 570
 #+end_example
 
-#+begin_example
 The code will output:
 
+#+begin_example
 Welcome to Min-Max Program!
 
 Find the smallest and largest integer in FILE.
