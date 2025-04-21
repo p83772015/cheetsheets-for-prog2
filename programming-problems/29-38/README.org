@@ -1,4 +1,23 @@
 * Programming Problems 29-38
+:PROPERTIES:
+:TOC:      :include all :depth 1
+:END:
+
+:CONTENTS:
+- [[#programming-problems-29-38][Programming Problems 29-38]]
+  - [[#problem29cpp][problem29.cpp]]
+  - [[#problem30cpp][problem30.cpp]]
+  - [[#problem31cpp][problem31.cpp]]
+  - [[#problem32cpp][problem32.cpp]]
+  - [[#problem33cpp][problem33.cpp]]
+  - [[#problem34cpp][problem34.cpp]]
+  - [[#problem35cpp][problem35.cpp]]
+  - [[#problem36cpp][problem36.cpp]]
+  - [[#problem37cpp][problem37.cpp]]
+  - [[#problem38cpp][problem38.cpp]]
+:END:
+
+
 ** problem29.cpp
 Write a program that reads a file containing floating-point numbers.  Print the average of the numbers in the file.  Prompt the user for the file name.
 
