@@ -1,0 +1,5 @@
+David Brown|Male|25
+Bob Smith|Male|20
+Henry Clark|Male|12
+Jack White|Male|8
+Frank Miller|Male|5

@@ -1,0 +1,5 @@
+Emma Wilson|Female|30
+Ivy Thompson|Female|22
+Grace Davis|Female|18
+Alice Johnson|Female|15
+Carol Lee|Female|10

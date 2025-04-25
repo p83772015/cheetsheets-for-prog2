@@ -1,0 +1,10 @@
+Alice Johnson|Female|15
+Bob Smith|Male|20
+Carol Lee|Female|10
+David Brown|Male|25
+Emma Wilson|Female|30
+Frank Miller|Male|5
+Grace Davis|Female|18
+Henry Clark|Male|12
+Ivy Thompson|Female|22
+Jack White|Male|8
