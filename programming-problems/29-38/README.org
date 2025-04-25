@@ -1382,6 +1382,30 @@ Merging done!
 Please Check the file(s): 'merged-patients-db.txt' and 'frequency.txt'
 #+end_example
 
+Original File(s):
+
+~36-best-patients~:
+
+#+CAPTION: 36-best-patients
+#+begin_example
+John|Doe|123 Main St, Springfield, IL|1985
+Jane|Smith|456 Elm St, Metropolis, NY|1980
+Emily|Johnson|789 Oak St, Gotham, NJ|1982
+Michael|Brown|321 Pine St, Star City, CA|1980
+Sarah|Davis|654 Maple St, Central City, TX|1992
+#+end_example
+
+~36-cushing-patients~:
+
+#+CAPTION: 36-cushing-patients
+#+begin_example
+Alice|Williams|135 Cherry Ln, Hill Valley, CA|1992
+David|Jones|246 Birch Rd, Smallville, KS|1988
+Sophia|Garcia|357 Cedar Ave, Sunnydale, FL|1994
+James|Martinez|468 Spruce St, Riverdale, NY|1980
+Olivia|Rodriguez|579 Walnut Dr, Starling City, WA|1986
+#+end_example
+
 Files Generated:
 
 #+CAPTION: merged-patients-db.txt
@@ -1574,6 +1598,23 @@ Enter PATIENT FILE [1]: 37-patient-file.txt
 Splitting done!
 Please Check the file(s): '37-male.txt' and '37-female.txt
 #+end_example
+
+Original File:
+
+#+CAPTION: 37-patient-file.txt
+#+begin_example
+Alice Johnson|Female|15
+Bob Smith|Male|20
+Carol Lee|Female|10
+David Brown|Male|25
+Emma Wilson|Female|30
+Frank Miller|Male|5
+Grace Davis|Female|18
+Henry Clark|Male|12
+Ivy Thompson|Female|22
+Jack White|Male|8
+#+end_example
+
 
 Files Generated:
 
