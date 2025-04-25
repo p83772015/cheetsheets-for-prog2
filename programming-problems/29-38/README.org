@@ -23,7 +23,7 @@ Write a program that reads a file containing floating-point numbers.  Print the 
 
 *** Solution
 #+NAME: problem29.cpp
-#+begin_src C++ :results output :cmdline <<< 29-floats.txt :exports both
+#+begin_src C++ :results output :cmdline <<< 29-floats.txt :exports both :tangle problem-29.cpp
   #include <iostream>
   #include <fstream>
   using namespace std;
@@ -118,7 +118,7 @@ tnew yraM taht erehwyreve dnA
 #+end_example
 
 *** Solution
-#+begin_src C++ :results output :cmdline :exports both
+#+begin_src C++ :results output :cmdline :exports both :tangle problem-30.cpp
   #include <iostream>
   #include <fstream>
   #include <algorithm>
@@ -217,7 +217,7 @@ tnew yraM taht erehwyreve dnA
 Write a program that will search a file of numbers of type ~int~ and write the largest and the smallest numbers to the screen.  The file contains nothing but numbers separated line breaks.
 
 *** Solution
-#+begin_src C++
+#+begin_src C++ :tangle problem-31.cpp
   #include <iostream>
   #include <fstream>
   using namespace std;
@@ -316,7 +316,7 @@ Largest integer: 923
 Write a program that merges the numbers in two files and writes all the numbers into a third file.  Your program takes input from two different files and writes its output to a third file.  Each input file contains a list of numbers of type ~int~ in sorted order from the smallest to the largest.  After the program is run, the output file will contain all the numbers in the two input files in one longer list in sorted order from smallest to largest.  Your program should define a function that will sort the values of the two input files.
 
 *** Solution
-#+begin_src C++
+#+begin_src C++ :tangle problem-32.cpp
   #include <iostream>
   #include <fstream>
   using namespace std;
@@ -575,7 +575,7 @@ The code will create a file named ~problem-32-output.txt~ containing these value
 Write a program to compute numeric grades for a course.  The course records are in a file that will serve as the input file.  The input file is in the following format: Each line contains a student’s last name, then one space, then the student’s first name, then one space, then ten quiz scores all on one line.  The quiz scores are whole numbers and are separated by one space.  Make a list of 10 students in the input file.  Your program will take its input from this file and send its output to a second file.  The data in the output file will be the same as the data in the input file except that there will be one additional number (of type double ) at the end of each line.  This number will be the average of the student’s ten quiz scores.  Write a function that computes the average of each individual student.
 
 *** Solution
-#+begin_src C++
+#+begin_src C++ :tangle problem-33.cpp
   #include <iostream>
   #include <fstream>
   using namespace std;
@@ -753,7 +753,7 @@ Zape Ben 96 96 81 81 99 99 99 90 86 93 92
 Create a program to read a file (~data.txt~) with a set of numbers then the program will determine the odd numbers and even numbers in the file.  Print the odd numbers in the file called ~odd.txt~ and even numbers in the file called ~even.txt~.
 
 *** Solution
-#+begin_src C++
+#+begin_src C++ :tangle problem-34.cpp
   #include <iostream>
   #include <fstream>
   using namespace std;
@@ -889,7 +889,8 @@ Boardman College maintains two files—one for Sociology majors and another for 
 
 The college is merging the two departments into a Department of Sociology and Anthropology.  Design the logic for a program that merges the two files into one file containing a list of all students, maintaining ID number order.
 
-#+begin_src C++
+*** Solution
+#+begin_src C++ :tangle problem-35.cpp
   #include <iostream>
   #include <fstream>
   #include <iomanip>
@@ -1157,7 +1158,7 @@ Create a program that produces a file of merged list of patients’ names in asc
 Create another file that it does not display patients’ names, but only produces a count of the number of patients born each year.
 
 *** Solution
-#+begin_src C++
+#+begin_src C++ :tangle problem-36.cpp
   #include <iostream>
   #include <fstream>
   #include <sstream>
@@ -1449,7 +1450,7 @@ Create a function that separates the client file to produce two files — one fo
 Each file is in descending weight loss order.
 
 ** Solution
-#+begin_src C++
+#+begin_src C++ :tangle problem-37.cpp
   #include <iostream>
   #include <fstream>
   #include <sstream>
@@ -1645,3 +1646,131 @@ Create a file containing the following names, Social Security numbers, hourly ra
 | Phil Anselmo  | 555-09-4263 | 9.80 | 35 |
 
 Write a C++ program that reads the data file and computes and displays a payroll schedule.  The output should list the Name, Social Security Number and Gross pay for every individual.
+
+*** Solution
+#+begin_src C++ :tangle problem-38.cpp
+  #include <iostream>
+  #include <fstream>
+  #include <sstream>
+  #include <iomanip>
+  using namespace std;
+
+  struct
+  Employee
+  {
+    string name;
+    string ssn;
+    double hourly_rate;
+    int hours_worked;
+  };
+
+  void
+  safe_open(fstream *file, string name, ios_base::openmode flag)
+  {
+    file->open(name, flag);
+    if (file->fail()) {
+      cerr << name << " for reading failed to open.\n";
+      exit(1);
+    }
+  }
+
+  void
+  add_employee(struct Employee employees[],
+  	     fstream *from_file,
+  	     size_t *size)
+  {
+    string line;
+    string rate_s;
+    string hrs_s;
+    stringstream ss;
+    while (getline(*from_file, line)) {
+      ss.clear();
+      ss << line;
+      getline(ss, employees->name, '|');
+      getline(ss, employees->ssn, '|');
+      getline(ss, rate_s, '|');
+      employees->hourly_rate = stod(rate_s);
+      getline(ss, hrs_s, '|');
+      employees->hours_worked = stoi(hrs_s);
+      employees++;
+      (*size)++;
+    }
+  }
+
+  void
+  display_gross(fstream *input_file)
+  {
+    struct Employee employees[255];
+    size_t employee_size = 0;
+    string line;
+
+    add_employee(employees, input_file, &employee_size);
+
+    cout << '\n';
+    cout << setw(16) << "Name"
+         << setw(16) << "SSN"
+         << setw(14) << "Gross Pay"
+         << '\n';
+    cout << setw(16) << "==========="
+         << setw(16) << "==========="
+         << setw(14) << "==========="
+         << '\n';
+    for (size_t i = 0; i < employee_size; ++i) {
+      cout << setw(16) << employees[i].name
+  	 << setw(16) << employees[i].ssn
+  	 << setw(14)
+  	 << employees[i].hourly_rate * employees[i].hours_worked
+  	 << '\n';
+    }
+  }
+
+  int
+  main ()
+  {
+    fstream input_file_1_obj;
+    string input_file_1_name;
+
+    cout << "Welcome to Gross Pay Calulator Program!\n"
+         << "\n"
+         << "Compute the gross pay of each employee from FILE.\n"
+         << "\n";
+    
+    // Open the text file for reading.
+    cout << "Enter input FILE [1]: ";
+    cin >> input_file_1_name;		// Prompt for text file for reading.
+    safe_open(&input_file_1_obj, input_file_1_name, ios::in);
+
+    // Notify user if done!
+    display_gross(&input_file_1_obj);
+
+    // Cleanup
+    input_file_1_obj.close();
+    return 0;
+  }
+#+end_src
+
+*** Sample Output
+#+begin_example
+Welcome to Gross Pay Calulator Program!
+
+Compute the gross pay of each employee from FILE.
+
+Enter input FILE [1]: 38-employees.txt
+
+            Name             SSN     Gross Pay
+     ===========     ===========   ===========
+    Eddie Vedder     555-98-4182        270.84
+   Scott Weiland     555-53-2147         332.8
+        Axl Rose     555-32-9826         261.6
+    Phil Anselmo     555-09-4263           343
+#+end_example
+
+Original File:
+
+#+CAPTION: 38-employees.txt
+#+begin_example
+Eddie Vedder|555-98-4182|7.32|37
+Scott Weiland|555-53-2147|8.32|40
+Axl Rose|555-32-9826|6.54|40
+Phil Anselmo|555-09-4263|9.80|35
+#+end_example
