@@ -1,0 +1,5 @@
+Alice|Williams|135 Cherry Ln, Hill Valley, CA|1992
+David|Jones|246 Birch Rd, Smallville, KS|1988
+Sophia|Garcia|357 Cedar Ave, Sunnydale, FL|1994
+James|Martinez|468 Spruce St, Riverdale, NY|1980
+Olivia|Rodriguez|579 Walnut Dr, Starling City, WA|1986

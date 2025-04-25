@@ -1,0 +1,10 @@
+James|Martinez|468 Spruce St, Riverdale, NY|1980|
+Jane|Smith|456 Elm St, Metropolis, NY|1980|
+Michael|Brown|321 Pine St, Star City, CA|1980|
+Emily|Johnson|789 Oak St, Gotham, NJ|1982|
+John|Doe|123 Main St, Springfield, IL|1985|
+Olivia|Rodriguez|579 Walnut Dr, Starling City, WA|1986|
+David|Jones|246 Birch Rd, Smallville, KS|1988|
+Alice|Williams|135 Cherry Ln, Hill Valley, CA|1992|
+Sarah|Davis|654 Maple St, Central City, TX|1992|
+Sophia|Garcia|357 Cedar Ave, Sunnydale, FL|1994|
